@@ -2,10 +2,12 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import Topic from './Topic';
+
 function TopicsList({ topics }) {
   return(
     <ul className="topics-list">
-      {topics.map(topic => <li key={topic.id}>{topic.content}</li>)}
+      {topics.map(topic => <Topic key={topic.id} topic={topic} />)}
     </ul>
   );
 }
