@@ -1,0 +1,19 @@
+.topic-record {
+  margin: 1.5em 0;
+  display: flex;
+}
+
+.topic-record-body {
+  order: 3;
+}
+
+.topic-record-votes {
+  color: #777;
+  font-size: 30px;
+  padding: 0 0.5em;
+  order: 2;
+}
+
+.topic-record-actions {
+  order: 1;
+}
