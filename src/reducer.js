@@ -1,12 +1,14 @@
+import uuid from 'uuid/v1';
+
 import {
   CREATE_TOPIC,
 } from './actions';
 
 export const INITIAL_STATE = {
-  topics: [],
+  topics: {},
 };
 
-function createTopicRecord(id, content) {
+export function createTopicRecord(id, content) {
   return {
     id,
     content,
@@ -14,20 +16,39 @@ function createTopicRecord(id, content) {
   };
 }
 
+/**
+ * Helper function to sort and pick the 20 top-voted records from state.
+ * Topic with a higher vote comes before a lower one.
+ *
+ * @param {object} state - the complete store state
+ * @return {array}
+ */
+export function top20TopicsSelector(state) {
+  if (!state) {
+    return [];
+  }
+
+  const allTopicsArray = Object.values(state.topics);
+
+  const top20Topics = allTopicsArray
+    .sort((topicA, topicB) => topicB.votes - topicA.votes)
+    .slice(0, 20);
+
+  return top20Topics;
+}
+
 function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case CREATE_TOPIC: {
       const newTopic = createTopicRecord(
-        state.topics.length,
+        uuid(),
         action.content
       );
 
-      // Clone the `state.topics` array before push so the old state won't be dirty.
-      const newTopicsArray = state.topics.slice();
-      newTopicsArray.push(newTopic);
-
       return Object.assign({}, state, {
-        topics: newTopicsArray,
+        topics: Object.assign({}, state.topics, {
+          [newTopic.id]: newTopic,
+        })
       });
     }
 
