@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-function Topic({ topic }) {
+function Topic({ topic, onUpvote, onDownvote }) {
   return (
     <li className="topic-record">
       <div className="topic-record-votes">
@@ -12,15 +11,21 @@ function Topic({ topic }) {
         {topic.content}
       </div>
       <div className="topic-record-actions">
-        <button type="button">
-          v downvote
-        </button>
-        <button type="button">
+        <button type="button" onClick={onUpvote}>
           ^ upvote
+        </button>
+        <button type="button" onClick={onDownvote}>
+          v downvote
         </button>
       </div>
     </li>
   );
 }
 
-export default connect()(Topic);
+Topic.propTypes = {
+  topic: PropTypes.object,
+  onUpvote: PropTypes.func.isRequired,
+  onDownvote: PropTypes.func.isRequired,
+};
+
+export default Topic;
