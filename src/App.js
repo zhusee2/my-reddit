@@ -8,9 +8,6 @@ class App extends Component {
     return (
       <div className="my-reddit">
         <h1>MyReddit</h1>
-        <button>
-          Add a Topic
-        </button>
 
         <TopicForm />
 
