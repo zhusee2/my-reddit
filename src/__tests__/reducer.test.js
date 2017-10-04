@@ -1,3 +1,4 @@
+import uuid from 'uuid/v1';
 import reducer, { INITIAL_STATE } from '../reducer';
 
 import {
@@ -13,13 +14,15 @@ it('returns initial state on init action with no state given', () => {
 });
 
 it('creates a topic record and adds to topics array on create action', () => {
-  const action = createTopic('foo-bar');
+  const topicId = uuid();
+  const action = createTopic('foo-bar', topicId);
   const nextState = reducer(undefined, action);
 
-  expect(nextState.topics).toHaveLength(1);
-  expect(nextState.topics[0]).toEqual({
-    id: 0,
-    content: 'foo-bar',
-    votes: 0,
+  expect(nextState.topics).toEqual({
+    [topicId]: {
+      id: topicId,
+      content: 'foo-bar',
+      votes: 0,
+    }
   });
 });

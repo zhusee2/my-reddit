@@ -41,7 +41,7 @@ function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case CREATE_TOPIC: {
       const newTopic = createTopicRecord(
-        uuid(),
+        action.topicId || uuid(),
         action.content
       );
 
