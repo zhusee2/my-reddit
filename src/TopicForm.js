@@ -45,6 +45,7 @@ class TopicForm extends React.PureComponent {
     return (
       <form onSubmit={this.handleFormSubmit}>
         <textarea
+          autoFocus
           maxLength={255}
           value={this.state.inputValue}
           onChange={this.handleTextareaChange} />
