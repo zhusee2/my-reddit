@@ -2,6 +2,8 @@ import uuid from 'uuid/v1';
 
 import {
   CREATE_TOPIC,
+  UPVOTE_TOPIC,
+  DOWNVOTE_TOPIC,
 } from './actions';
 
 export const INITIAL_STATE = {
@@ -37,6 +39,21 @@ export function top20TopicsSelector(state) {
   return top20Topics;
 }
 
+/**
+ * Helper function to get the topic by ID.
+ *
+ * @param {object} state
+ * @param {string} topicId
+ * @return {Topic}
+ */
+export function topicSelector(state, topicId) {
+  if (!state) {
+    return null;
+  }
+
+  return state.topics[topicId];
+}
+
 function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case CREATE_TOPIC: {
@@ -48,6 +65,28 @@ function reducer(state = INITIAL_STATE, action) {
       return Object.assign({}, state, {
         topics: Object.assign({}, state.topics, {
           [newTopic.id]: newTopic,
+        })
+      });
+    }
+
+    case UPVOTE_TOPIC: {
+      const topic = topicSelector(state, action.topicId);
+      const updatedTopic = Object.assign({}, topic, { votes: topic.votes + 1 });
+
+      return Object.assign({}, state, {
+        topics: Object.assign({}, state.topics, {
+          [action.topicId]: updatedTopic,
+        })
+      });
+    }
+
+    case DOWNVOTE_TOPIC: {
+      const topic = topicSelector(state, action.topicId);
+      const updatedTopic = Object.assign({}, topic, { votes: topic.votes - 1 });
+
+      return Object.assign({}, state, {
+        topics: Object.assign({}, state.topics, {
+          [action.topicId]: updatedTopic,
         })
       });
     }
