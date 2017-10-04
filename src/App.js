@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import TopicForm from './TopicForm';
 import TopicsList from './TopicsList';
 
 class App extends Component {
@@ -10,6 +11,8 @@ class App extends Component {
         <button>
           Add a Topic
         </button>
+
+        <TopicForm />
 
         <h2>Top 20 Topics</h2>
 
