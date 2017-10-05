@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { createTopic } from './actions';
 
+import './styles/TopicForm.css';
+
 class TopicForm extends React.PureComponent {
   static propTypes= {
     dispatch: PropTypes.func.isRequired,
@@ -43,15 +45,16 @@ class TopicForm extends React.PureComponent {
 
   renderForm() {
     return (
-      <form onSubmit={this.handleFormSubmit}>
+      <form className="topic-form" onSubmit={this.handleFormSubmit}>
         <textarea
           autoFocus
+          rows="6"
           maxLength={255}
           value={this.state.inputValue}
           onChange={this.handleTextareaChange} />
         <br />
 
-        <a href="#cancel" onClick={this.handleFormCancelClick}>
+        <a href="#cancel" className="cancel-link" onClick={this.handleFormCancelClick}>
           Cancel
         </a>
 

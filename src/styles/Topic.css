@@ -1,5 +1,8 @@
 .topic-record {
+  background-color: white;
   margin: 1.5em 0;
+  padding: 1em;
+  border-radius: 6px;
   display: flex;
 }
 
@@ -10,10 +13,16 @@
 .topic-record-votes {
   color: #777;
   font-size: 30px;
+  line-height: 1.5;
   padding: 0 0.5em;
   order: 2;
 }
 
 .topic-record-actions {
   order: 1;
+}
+
+.topic-record-actions button {
+  width: 2em;
+  height: 2em;
 }

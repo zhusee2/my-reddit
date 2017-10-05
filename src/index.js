@@ -8,7 +8,7 @@ import App from './App';
 
 import reducer from './reducer';
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import './styles/index.css';
 
 const store = createStore(
   reducer,

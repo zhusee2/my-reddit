@@ -1,0 +1,10 @@
+.topic-form textarea {
+  width: 100%;
+  max-width: 600px;
+}
+
+.topic-form .cancel-link {
+  color: #777;
+  font-size: 14px;
+  margin-right: 2em;
+}
