@@ -43,6 +43,14 @@ class TopicForm extends React.PureComponent {
     event.preventDefault();
   }
 
+  renderButton() {
+    return (
+      <button onClick={this.handleAddTopicClick}>
+        Add Topic
+      </button>
+    );
+  }
+
   renderForm() {
     return (
       <form className="topic-form" onSubmit={this.handleFormSubmit}>
@@ -64,15 +72,11 @@ class TopicForm extends React.PureComponent {
   }
 
   render() {
-    return (
-      <div>
-        <button onClick={this.handleAddTopicClick}>
-          Add Topic
-        </button>
+    const content = this.state.showForm
+      ? this.renderForm()
+      : this.renderButton();
 
-        {this.state.showForm && this.renderForm()}
-      </div>
-    );
+    return <div>{content}</div>;
   }
 }
 
