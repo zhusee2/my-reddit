@@ -6,7 +6,7 @@ import { createTopic } from './actions';
 
 import './styles/TopicForm.css';
 
-class TopicForm extends React.PureComponent {
+export class TopicForm extends React.PureComponent {
   static propTypes= {
     dispatch: PropTypes.func.isRequired,
   };
@@ -15,6 +15,13 @@ class TopicForm extends React.PureComponent {
     inputValue: '',
     showForm: false,
   };
+
+  hideAndResetForm() {
+    this.setState({
+      inputValue: '',
+      showForm: false,
+    });
+  }
 
   handleTextareaChange = (event) => {
     this.setState({
@@ -27,10 +34,7 @@ class TopicForm extends React.PureComponent {
     this.props.dispatch(action);
 
     // Reset input for next submission
-    this.setState({
-      inputValue: '',
-      showForm: false,
-    });
+    this.hideAndResetForm();
     event.preventDefault();
   }
 
@@ -39,13 +43,13 @@ class TopicForm extends React.PureComponent {
   }
 
   handleFormCancelClick = (event) => {
-    this.setState({ showForm: false });
+    this.hideAndResetForm();
     event.preventDefault();
   }
 
   renderButton() {
     return (
-      <button onClick={this.handleAddTopicClick}>
+      <button className="btn-add-topic" onClick={this.handleAddTopicClick}>
         Add Topic
       </button>
     );

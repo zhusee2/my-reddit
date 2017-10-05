@@ -7,7 +7,7 @@ import Topic from './Topic';
 import { upvoteTopic, downvoteTopic } from './actions';
 import { top20TopicsSelector, topicPropTypes } from './reducer';
 
-function TopicsList({ topics, onUpvote, onDownvote }) {
+export function TopicsList({ topics, onUpvote, onDownvote }) {
   const topicViews = topics.map((topic) => (
     <Topic
       key={topic.id}
