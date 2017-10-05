@@ -1,10 +1,17 @@
 import uuid from 'uuid/v1';
+import * as PropTypes from 'prop-types';
 
 import {
   CREATE_TOPIC,
   UPVOTE_TOPIC,
   DOWNVOTE_TOPIC,
 } from './actions';
+
+export const topicPropTypes = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  votes: PropTypes.number.isRequired,
+});
 
 export function createTopicRecord(id, content) {
   return {

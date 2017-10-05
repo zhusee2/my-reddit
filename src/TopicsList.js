@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Topic from './Topic';
 
 import { upvoteTopic, downvoteTopic } from './actions';
-import { top20TopicsSelector } from './reducer';
+import { top20TopicsSelector, topicPropTypes } from './reducer';
 
 function TopicsList({ topics, onUpvote, onDownvote }) {
   const topicViews = topics.map((topic) => (
@@ -25,7 +25,7 @@ function TopicsList({ topics, onUpvote, onDownvote }) {
 }
 
 TopicsList.propTypes = {
-  topics: PropTypes.array,
+  topics: PropTypes.arrayOf(topicPropTypes),
   onUpvote: PropTypes.func.isRequired,
   onDownvote: PropTypes.func.isRequired,
 };

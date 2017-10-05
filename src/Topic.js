@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+import { topicPropTypes } from './reducer';
 import './styles/Topic.css';
 
 function Topic({ topic, onUpvote, onDownvote }) {
@@ -34,7 +35,7 @@ function Topic({ topic, onUpvote, onDownvote }) {
 }
 
 Topic.propTypes = {
-  topic: PropTypes.object,
+  topic: topicPropTypes,
   onUpvote: PropTypes.func.isRequired,
   onDownvote: PropTypes.func.isRequired,
 };
