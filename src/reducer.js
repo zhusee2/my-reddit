@@ -6,10 +6,6 @@ import {
   DOWNVOTE_TOPIC,
 } from './actions';
 
-export const INITIAL_STATE = {
-  topics: {},
-};
-
 export function createTopicRecord(id, content) {
   return {
     id,
@@ -54,6 +50,25 @@ export function topicSelector(state, topicId) {
   return state.topics[topicId];
 }
 
+/**
+ * Get a new state with given topic record.
+ *
+ * @param {object} state
+ * @param {string} topicId
+ * @param {Topic} topicRecord
+ */
+export function getUpdatedStateWithTopic(state, topicId, topicRecord) {
+  return Object.assign({}, state, {
+    topics: Object.assign({}, state.topics, {
+      [topicId]: topicRecord,
+    })
+  });
+}
+
+export const INITIAL_STATE = {
+  topics: {},
+};
+
 function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case CREATE_TOPIC: {
@@ -62,33 +77,21 @@ function reducer(state = INITIAL_STATE, action) {
         action.content
       );
 
-      return Object.assign({}, state, {
-        topics: Object.assign({}, state.topics, {
-          [newTopic.id]: newTopic,
-        })
-      });
+      return getUpdatedStateWithTopic(state, newTopic.id, newTopic);
     }
 
     case UPVOTE_TOPIC: {
       const topic = topicSelector(state, action.topicId);
       const updatedTopic = Object.assign({}, topic, { votes: topic.votes + 1 });
 
-      return Object.assign({}, state, {
-        topics: Object.assign({}, state.topics, {
-          [action.topicId]: updatedTopic,
-        })
-      });
+      return getUpdatedStateWithTopic(state, action.topicId, updatedTopic);
     }
 
     case DOWNVOTE_TOPIC: {
       const topic = topicSelector(state, action.topicId);
       const updatedTopic = Object.assign({}, topic, { votes: topic.votes - 1 });
 
-      return Object.assign({}, state, {
-        topics: Object.assign({}, state.topics, {
-          [action.topicId]: updatedTopic,
-        })
-      });
+      return getUpdatedStateWithTopic(state, action.topicId, updatedTopic);
     }
 
     default:
